@@ -1,5 +1,7 @@
-<template></template>
+<template><Footer /></template>
 
-<script setup></script>
+<script setup>
+import Footer from "@/components/Footer.vue";
+</script>
 
 <style scoped></style>
