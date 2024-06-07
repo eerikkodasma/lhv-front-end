@@ -22,7 +22,7 @@
 <style scoped>
 .footer {
   display: flex;
-  padding: 3.75rem 0rem;
+  padding: 3.75rem 0;
   gap: 1.88rem;
 }
 
