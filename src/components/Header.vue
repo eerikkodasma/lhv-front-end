@@ -28,7 +28,7 @@ import { FORMATS } from "@/enums/components";
   position: relative;
   background-color: #8ecdd1;
   padding: 3.75rem 2.5rem 3.75rem 18.38rem;
-  margin: 0 0 63px 81px;
+  margin: 0 0 3.94rem 5.06rem;
   border-radius: 0.25rem;
 }
 
@@ -37,7 +37,7 @@ import { FORMATS } from "@/enums/components";
   width: 18.38rem;
   height: 18.38rem;
   top: 57px;
-  left: -81px;
+  left: -5.06rem;
   border-radius: 0.25rem;
 }
 
@@ -59,6 +59,5 @@ h5 {
   font-size: 0.88rem;
   line-height: 1.25rem;
   font-weight: 700;
-  padding: 0;
 }
 </style>

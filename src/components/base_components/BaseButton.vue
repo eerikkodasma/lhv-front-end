@@ -6,9 +6,7 @@
     :disabled="disabled"
     @click="onClick"
   >
-    <div v-if="$slots.leftIcon" class="btn--left-icon">
-      <slot name="left-icon"></slot>
-    </div>
+    <slot name="left-icon"></slot>
     <slot>Click me!</slot>
     <slot name="right-icon"></slot>
   </button>
@@ -46,10 +44,12 @@ const emits = defineEmits(["onClick"]);
 .btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: fit-content;
   cursor: pointer;
   border: none;
   gap: 0.5rem;
+  padding: 0;
 }
 
 .btn--primary {
