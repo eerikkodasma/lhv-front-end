@@ -7,14 +7,24 @@
       <div class="product-table">
         <div class="table-left">
           <p class="table-title">TOODE</p>
-          <p
-            class="table-row"
-            v-for="(name, index) in productNames"
+          <BaseInput
+            v-for="(_, index) in productNames"
             :key="index"
+            :model-value="products[index].name"
+            class="table-input"
+            :id="`product-${index}`"
+            name="product"
+            type=""
+            placeholder="Type here..."
+            @update:model-value="
+              (value) => (products[index] = { ...products[index], name: value })
+            "
+          />
+          <BaseButton
+            class="product-add"
+            :format="FORMATS.TERTIARY"
+            @click="addProduct"
           >
-            {{ name }}
-          </p>
-          <BaseButton class="product-add" :format="FORMATS.TERTIARY">
             <template #left-icon>
               <img src="@/assets/icons/circle-plus.svg" alt="circle-plus" />
             </template>
@@ -23,14 +33,30 @@
         </div>
         <div class="table-right">
           <p class="table-title">HIND</p>
-          <p
-            class="table-row table-row-price"
-            v-for="(price, index) in productPrices"
+          <BaseInput
+            class="table-input"
+            v-for="(_, index) in productPrices"
             :key="index"
+            :model-value="products[index].price"
+            :id="`amount-${index}`"
+            name="amount"
+            type="number"
+            placeholder="Type here..."
+            acceptsCommas
+            @update:model-value="
+              (value) =>
+                (products[index] = { ...products[index], price: value })
+            "
           >
-            {{ price }} <span class="product-price-symbol">€</span>
-          </p>
-          <BaseButton class="product-delete" :format="FORMATS.TERTIARY">
+            <template #iconAfter
+              ><span class="product-price-symbol">€</span></template
+            >
+          </BaseInput>
+          <BaseButton
+            class="product-delete"
+            :format="FORMATS.TERTIARY"
+            @click="removeLastProduct"
+          >
             <template #left-icon>
               <img src="@/assets/icons/trash.svg" alt="trash" />
             </template>
@@ -51,6 +77,7 @@
 
 <script setup>
 import BaseButton from "@/components/base_components/BaseButton.vue";
+import BaseInput from "@/components/base_components/BaseInput.vue";
 import { FORMATS } from "@/enums/components";
 import { ref, computed } from "vue";
 
@@ -65,7 +92,26 @@ const productNames = computed(() =>
 const productPrices = computed(() =>
   products.value.map((product) => product.price)
 );
-const productAmount = productPrices.value.reduce((a, b) => a + b, 0);
+
+// Need to round to 2 decimal places because system calculation failures
+const productAmount = computed(() =>
+  productPrices.value.reduce(
+    (a, b) => parseFloat((parseFloat(a || 0) + parseFloat(b || 0)).toFixed(2)),
+    0
+  )
+);
+
+const addProduct = () => {
+  products.value = [...products.value, { name: "", price: "" }];
+};
+
+const removeLastProduct = () => {
+  if (products.value.length !== 1) {
+    products.value.splice(-1);
+  } else {
+    products.value = [{ name: "", price: "" }];
+  }
+};
 </script>
 
 <style scoped>
@@ -161,6 +207,18 @@ const productAmount = productPrices.value.reduce((a, b) => a + b, 0);
   font-weight: 200;
   line-height: 3rem;
   letter-spacing: -0.015rem;
+  word-wrap: break-word;
+  text-align: center;
+  width: 100%;
+}
+
+::v-deep(.table-input .input) {
+  background: transparent;
+  border: none;
+  border-bottom: 0.06rem solid #c6c4c7;
+}
+::v-deep(.table-input .input:focus-visible) {
+  outline: 0;
 }
 
 .request-button {
@@ -182,6 +240,7 @@ const productAmount = productPrices.value.reduce((a, b) => a + b, 0);
 
 .product-price-symbol {
   color: #89868d;
+  border-bottom: 0.06rem solid #c6c4c7;
 }
 
 .condition-button {

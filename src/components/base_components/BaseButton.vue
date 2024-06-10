@@ -30,7 +30,7 @@ const props = defineProps({
 });
 
 const onClick = (event) => {
-  if (disabled) {
+  if (props.disabled) {
     event.preventDefault();
     return;
   }
