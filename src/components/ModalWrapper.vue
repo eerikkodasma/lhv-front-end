@@ -42,8 +42,10 @@ const props = defineProps({
   border-radius: 1.88rem;
   max-width: 90%;
   padding: 2.5rem;
-  width: 25rem;
   gap: 1.5rem;
+  width: 40rem;
+  max-height: 60%;
+  overflow: auto;
 }
 
 .modal-header {

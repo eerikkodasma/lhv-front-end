@@ -67,28 +67,36 @@
       <div class="product-right">
         <p class="table-amount">{{ productAmount }} €</p>
         <div class="action-section">
-          <BaseButton class="request-button" @click="isModalOpen = true"
+          <BaseButton class="request-button" @click="isLoanModalOpen = true"
             >Taotle sisustuslaenu</BaseButton
           >
-          <p class="condition-button">Tutvu tingimustega</p>
+          <p class="condition-button" @click="isConditionsModalOpen = true">
+            Tutvu tingimustega
+          </p>
         </div>
       </div>
     </div>
     <LoanPersonalDetailsModal
-      v-if="isModalOpen"
-      @close="isModalOpen = !isModalOpen"
+      v-if="isLoanModalOpen"
+      @close="isLoanModalOpen = !isLoanModalOpen"
+    />
+    <TermsAndConditions
+      v-if="isConditionsModalOpen"
+      @close="isConditionsModalOpen = !isConditionsModalOpen"
     />
   </div>
 </template>
 
 <script setup>
 import LoanPersonalDetailsModal from "@/components/LoanPersonalDetailsModal.vue";
+import TermsAndConditions from "@/components/TermsAndConditions.vue";
 import BaseButton from "@/components/base_components/BaseButton.vue";
 import BaseInput from "@/components/base_components/BaseInput.vue";
 import { FORMATS } from "@/enums/components";
 import { ref, computed } from "vue";
 
-const isModalOpen = ref(false);
+const isLoanModalOpen = ref(false);
+const isConditionsModalOpen = ref(false);
 const products = ref([
   { name: "Diivan", price: 500 },
   { name: "Lamp", price: 85 },
@@ -250,6 +258,7 @@ const removeLastProduct = () => {
 }
 
 .condition-button {
+  cursor: pointer;
   padding: 0;
   color: #6c6972;
   border-bottom: 0.06rem solid #6c6972;
