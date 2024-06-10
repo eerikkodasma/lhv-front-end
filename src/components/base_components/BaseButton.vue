@@ -49,7 +49,11 @@ const emits = defineEmits(["onClick"]);
   cursor: pointer;
   border: none;
   gap: 0.5rem;
-  padding: 0;
+  font-size: 0.88rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
 }
 
 .btn--primary {

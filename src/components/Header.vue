@@ -56,8 +56,7 @@ h5 {
 }
 
 .header-button {
-  font-size: 0.88rem;
-  line-height: 1.25rem;
   font-weight: 700;
+  padding: 0;
 }
 </style>

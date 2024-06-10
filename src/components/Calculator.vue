@@ -67,20 +67,28 @@
       <div class="product-right">
         <p class="table-amount">{{ productAmount }} €</p>
         <div class="action-section">
-          <BaseButton class="request-button">Taotle sisustuslaenu</BaseButton>
+          <BaseButton class="request-button" @click="isModalOpen = true"
+            >Taotle sisustuslaenu</BaseButton
+          >
           <p class="condition-button">Tutvu tingimustega</p>
         </div>
       </div>
     </div>
+    <LoanPersonalDetailsModal
+      v-if="isModalOpen"
+      @close="isModalOpen = !isModalOpen"
+    />
   </div>
 </template>
 
 <script setup>
+import LoanPersonalDetailsModal from "@/components/LoanPersonalDetailsModal.vue";
 import BaseButton from "@/components/base_components/BaseButton.vue";
 import BaseInput from "@/components/base_components/BaseInput.vue";
 import { FORMATS } from "@/enums/components";
 import { ref, computed } from "vue";
 
+const isModalOpen = ref(false);
 const products = ref([
   { name: "Diivan", price: 500 },
   { name: "Lamp", price: 85 },
@@ -162,10 +170,12 @@ const removeLastProduct = () => {
 }
 
 .product-add {
+  padding: 0;
   color: #6c6972;
 }
 
 .product-delete {
+  padding: 0;
   color: #6c6972;
   align-self: end;
 }
@@ -223,10 +233,6 @@ const removeLastProduct = () => {
 
 .request-button {
   padding: 0.88rem 1rem;
-  border-radius: 0.25rem;
-  width: 100%;
-  font-size: 0.88rem;
-  line-height: 1.25rem;
   font-weight: 500;
 }
 
@@ -244,11 +250,8 @@ const removeLastProduct = () => {
 }
 
 .condition-button {
-  font-size: 0.88rem;
-  line-height: 1.25rem;
-  font-weight: 400;
+  padding: 0;
   color: #6c6972;
   border-bottom: 0.06rem solid #6c6972;
-  width: fit-content;
 }
 </style>

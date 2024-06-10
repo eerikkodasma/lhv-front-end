@@ -3,7 +3,7 @@
     <div class="input-wrapper">
       <slot name="iconBefore"></slot>
       <input
-        class="input"
+        :class="['input', errors?.length && 'input-warning']"
         :value="modelValue"
         :id="id"
         :type="type === 'number' && acceptsCommas ? 'text' : type"
@@ -12,6 +12,11 @@
         @input="handleInput($event.target.value)"
       />
       <slot name="iconAfter"></slot>
+    </div>
+    <div v-if="errors?.length">
+      <div v-for="(error, index) in errors" :key="index" class="input-error">
+        {{ error }}
+      </div>
     </div>
   </div>
 </template>
@@ -45,6 +50,10 @@ const props = defineProps({
   acceptsCommas: {
     type: Boolean,
     default: false,
+  },
+  errors: {
+    type: Array,
+    default: () => [],
   },
 });
 
@@ -85,5 +94,13 @@ const emit = defineEmits(["update:modelValue"]);
 
 .input {
   width: 100%;
+}
+
+.input-error {
+  color: red;
+}
+
+.input-warning {
+  border: 0.06rem solid red;
 }
 </style>
