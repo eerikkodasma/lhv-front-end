@@ -3,7 +3,7 @@
     <h1 class="calculator-header">
       <span>Koosta soovinimekiri</span> ja vaata oma uue sisustuse kuumakset
     </h1>
-    <div class="calculator">
+    <div id="calculator" class="calculator">
       <div class="product-table">
         <div class="table-left">
           <p class="table-title">TOODE</p>
@@ -139,12 +139,18 @@ const removeLastProduct = () => {
   padding: 3.75rem;
   border-radius: 0.25rem;
   gap: 2.5rem;
+
+  @media screen and (max-width: 600px) {
+    gap: 2.5rem;
+    padding: 2.5rem 1.5rem;
+    border-radius: 0.25rem;
+  }
 }
 
 .calculator-header {
   text-align: center;
   letter-spacing: -0.005rem;
-  width: 38.38rem;
+  max-width: 38.38rem;
 }
 
 .calculator-header span {
@@ -158,7 +164,11 @@ const removeLastProduct = () => {
   justify-content: center;
   align-items: center;
   gap: 5rem;
-  width: 38.56rem;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
 }
 
 .product-table {
@@ -193,6 +203,11 @@ const removeLastProduct = () => {
   flex-direction: column;
   gap: 1rem;
   width: 13.25rem;
+
+  @media screen and (max-width: 600px) {
+    flex: 1;
+    width: auto;
+  }
 }
 
 .table-right {
@@ -200,6 +215,11 @@ const removeLastProduct = () => {
   flex-direction: column;
   gap: 1rem;
   width: 8.25rem;
+
+  @media screen and (max-width: 600px) {
+    flex: 1;
+    width: auto;
+  }
 }
 
 .table-title {
