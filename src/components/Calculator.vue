@@ -97,10 +97,7 @@ import { ref, computed } from "vue";
 
 const isLoanModalOpen = ref(false);
 const isConditionsModalOpen = ref(false);
-const products = ref([
-  { name: "Diivan", price: 500 },
-  { name: "Lamp", price: 85 },
-]);
+const products = ref([{ name: "", price: "" }]);
 
 const productNames = computed(() =>
   products.value.map((product) => product.name)
