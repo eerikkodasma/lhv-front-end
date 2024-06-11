@@ -14,26 +14,28 @@
           : 'section-mobile-flipped',
       ]"
     >
-      <h5 v-if="isMobile && !isCardFlipped">
+      <h5 :style="[isMobile && isCardFlipped && 'display: none']">
         Kas sinu diivan on oma aja ära elanud?
       </h5>
-      <template v-else>
-        <p class="section-text">
-          Oled väsinud segadusest, kus asjadel pole oma kohta. Oled unistanud
-          lausa täiesti uuest sisekujundusest, aga kõik tundub korraga liiga
-          kallis? LHV sisustuslaenuga saad oma unistused ellu viia juba täna.
-        </p>
-        <BaseButton
-          class="header-button"
-          :format="FORMATS.TERTIARY"
-          @click="scrollToElement"
-        >
-          Loe lisa
-          <template #right-icon>
-            <img src="../assets/icons/down-arrow.svg" alt="arrow" />
-          </template>
-        </BaseButton>
-      </template>
+      <p
+        class="section-text"
+        :style="[isMobile && !isCardFlipped && 'display: none']"
+      >
+        Oled väsinud segadusest, kus asjadel pole oma kohta. Oled unistanud
+        lausa täiesti uuest sisekujundusest, aga kõik tundub korraga liiga
+        kallis? LHV sisustuslaenuga saad oma unistused ellu viia juba täna.
+      </p>
+      <BaseButton
+        class="header-button"
+        :format="FORMATS.TERTIARY"
+        @click="scrollToElement"
+        :style="[isMobile && !isCardFlipped && 'display: none']"
+      >
+        Loe lisa
+        <template #right-icon>
+          <img src="../assets/icons/down-arrow.svg" alt="arrow" />
+        </template>
+      </BaseButton>
     </div>
     <img
       v-if="isMobile"
@@ -83,6 +85,7 @@ function scrollToElement() {
   top: 57px;
   left: -5.06rem;
   border-radius: 0.25rem;
+  object-fit: cover;
 
   @media screen and (max-width: 600px) {
     position: static;
